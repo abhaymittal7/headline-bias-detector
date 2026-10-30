@@ -5,7 +5,7 @@ from src.analysis.story_aggregator import aggregate_stories
 
 from src.utils.db import DB_PATH
 
-def generate_report():
+def generate_report(comparisons=None):
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
@@ -66,7 +66,8 @@ def generate_report():
     print(" CLUSTER-LEVEL FRAMING INSIGHTS")
     print("="*70)
     
-    comparisons = aggregate_stories()
+    if comparisons is None:
+        comparisons = aggregate_stories()
     
     if not comparisons:
         print("\nNo significant cross-source framing differences detected.")

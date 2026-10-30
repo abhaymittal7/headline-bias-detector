@@ -5,6 +5,8 @@ from datetime import datetime
 # Consolidated path logic (handles running from project root or notebooks/ dir)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DB_PATH = os.path.join(BASE_DIR, "data", "headlines_db.sqlite")
+CONFIG_DIR = os.path.join(BASE_DIR, "config")
+os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
 
 
 def get_connection():

@@ -1,9 +1,13 @@
 import json
+import os
+import re
+
+from src.utils.db import CONFIG_DIR
 
 
 def load_kb():
     try:
-        with open("config/entity_side_kb.json", "r", encoding="utf-8") as f:
+        with open(os.path.join(CONFIG_DIR, "entity_side_kb.json"), "r", encoding="utf-8") as f:
             return json.load(f)
     except Exception as e:
         print(f"[ERROR] Failed to load KB: {e}")
@@ -58,7 +62,9 @@ def map_entities(entities):
                 text_lower = text.lower()
                 for kb_key, kb_side in kb.items():
                     key_lower = kb_key.lower()
-                    if key_lower in text_lower or text_lower in key_lower:
+                    # Whole-word match only, so "AI" does not match "Patnaik"
+                    if (re.search(r"\b" + re.escape(key_lower) + r"\b", text_lower)
+                            or re.search(r"\b" + re.escape(text_lower) + r"\b", key_lower)):
                         side = kb_side
                         break
 

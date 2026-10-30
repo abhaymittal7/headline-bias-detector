@@ -1,0 +1,68 @@
+# Extra headline collection through Google News RSS search.
+# For each outlet below, we query Google News with "site:<domain> <topic>"
+# and keep only items whose publisher matches that domain.
+# Names and leans match config/sources.yaml so reports group them together.
+
+outlets:
+  - name: Reuters World
+    domain: reuters.com
+    lean: center
+  - name: AP News
+    domain: apnews.com
+    lean: center
+  - name: BBC
+    domain: bbc.com
+    lean: center
+  - name: Guardian
+    domain: theguardian.com
+    lean: center-left
+  - name: HuffPost
+    domain: huffpost.com
+    lean: left
+  - name: Fox News
+    domain: foxnews.com
+    lean: right
+  - name: Breitbart
+    domain: breitbart.com
+    lean: right
+  - name: Al Jazeera
+    domain: aljazeera.com
+    lean: center-left
+  - name: The Hindu
+    domain: thehindu.com
+    lean: center
+  - name: Indian Express
+    domain: indianexpress.com
+    lean: center
+  - name: NDTV
+    domain: ndtv.com
+    lean: center-left
+  - name: Times of India
+    domain: timesofindia.indiatimes.com
+    lean: center-right
+  - name: Republic World
+    domain: republicworld.com
+    lean: right
+
+# Each topic becomes one search per outlet and is stored in topic_category.
+topics:
+  - politics
+  - government
+  - election
+  - opposition
+  - economy
+  - business
+  - budget
+  - court
+  - police
+  - protest
+  - war
+  - world
+  - india
+  - united states
+  - china
+  - climate
+  - health
+  - technology
+  - education
+  - sports

@@ -1,12 +1,15 @@
 import json
+import os
 import re
+
+from src.utils.db import CONFIG_DIR
 
 
 # ----------------------------------------
 # Load lexicon
 # ----------------------------------------
 def load_lexicon():
-    with open("config/loaded_lexicon.json", "r", encoding="utf-8") as f:
+    with open(os.path.join(CONFIG_DIR, "loaded_lexicon.json"), "r", encoding="utf-8") as f:
         return json.load(f)
 
 

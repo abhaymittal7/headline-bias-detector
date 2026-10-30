@@ -64,22 +64,20 @@ def cluster_headlines(threshold=0.7):
     # ----------------------------------------
     # Clustering (Greedy Threshold Clustering)
     # ----------------------------------------
+    # Same greedy algorithm as before, vectorised with numpy so it stays
+    # fast for thousands of headlines (the pure-Python double loop is O(n^2)).
     clusters = []
-    visited = set()
+    visited = np.zeros(len(texts), dtype=bool)
 
     for i in range(len(texts)):
-        if i in visited:
+        if visited[i]:
             continue
 
-        cluster = [i]
-        visited.add(i)
+        visited[i] = True
+        members = np.where((sim_matrix[i] >= threshold) & ~visited)[0]
+        visited[members] = True
 
-        for j in range(len(texts)):
-            if j != i and j not in visited and sim_matrix[i][j] >= threshold:
-                cluster.append(j)
-                visited.add(j)
-
-        clusters.append(cluster)
+        clusters.append([i] + members.tolist())
 
     conn.close()
 

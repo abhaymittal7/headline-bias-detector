@@ -36,7 +36,7 @@ def main():
     display_comparisons(comparisons)
 
     print("\n[STEP 8] Generating Final Analytics Report...")
-    generate_report()
+    generate_report(comparisons)
 
     print("\n[DONE] Pipeline complete.")
 

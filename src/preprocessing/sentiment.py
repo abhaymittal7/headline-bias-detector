@@ -1,7 +1,12 @@
+import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 
-# Initialize once
-sia = SentimentIntensityAnalyzer()
+# Initialize once (download the VADER lexicon on first run if missing)
+try:
+    sia = SentimentIntensityAnalyzer()
+except LookupError:
+    nltk.download("vader_lexicon", quiet=True)
+    sia = SentimentIntensityAnalyzer()
 
 
 # ----------------------------------------

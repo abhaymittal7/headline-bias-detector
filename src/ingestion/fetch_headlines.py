@@ -1,13 +1,14 @@
 import feedparser
 import uuid
 from datetime import datetime
+import os
 import yaml
 
-from src.utils.db import insert_headline
+from src.utils.db import insert_headline, CONFIG_DIR
 
 
 def load_sources():
-    with open("config/sources.yaml", "r") as f:
+    with open(os.path.join(CONFIG_DIR, "sources.yaml"), "r") as f:
         return yaml.safe_load(f)["sources"]
 
 

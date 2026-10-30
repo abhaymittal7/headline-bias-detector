@@ -36,7 +36,7 @@ graph TD
 
 ### Prerequisites
 - Python 3.9+
-- [Spacy Model](https://spacy.io/models/en): `en_core_web_sm`
+- [Spacy Model](https://spacy.io/models/en): `en_core_web_md`
 
 ### Setup
 1. **Clone the repository**:
@@ -58,7 +58,7 @@ graph TD
 
 4. **Download NLP models**:
    ```bash
-   python -m spacy download en_core_web_sm
+   python -m spacy download en_core_web_md
    python -c "import nltk; nltk.download('vader_lexicon')"
    ```
 
@@ -74,9 +74,13 @@ python main.py
 
 ### Utility Scripts
 All auxiliary tools are located in the `scripts/` directory. Run them from the project root:
-- **Verify Stats**: `python scripts/verify_bias.py`
-- **Export Entities**: `python scripts/export_entities.py`
-- **Manual Analysis**: `python scripts/run_analysis.py`
+- **Verify Stats**: `python -m scripts.verify_bias`
+- **Export Entities**: `python -m scripts.export_entities`
+- **Manual Analysis**: `python -m scripts.run_analysis`
+- **Accuracy Evaluation**: `python -m scripts.evaluate` (BABE expert-labelled data, see `datasets/README.md`)
+- **Grow Dataset to 5000**: `python -m scripts.collect_headlines` (then run `python main.py`)
+- **Dataset Statistics**: `python -m scripts.collect_headlines --stats`
+- **Single Headline**: `python -m scripts.analyze_headline "Your headline here"`
 
 ---
 

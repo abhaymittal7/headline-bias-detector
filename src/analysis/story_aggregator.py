@@ -40,18 +40,25 @@ def aggregate_stories():
                     "headlines": cluster_data
                 })
                 
+    # Stories covered by the most distinct outlets first
+    comparisons.sort(key=lambda s: len({h["source"] for h in s["headlines"]}), reverse=True)
     return comparisons
 
-def display_comparisons(comparisons):
+def display_comparisons(comparisons, limit=20):
     print("\n" + "="*60)
     print(" CROSS-SOURCE STORY BIAS REPORT")
     print("="*60)
-    
+
     if not comparisons:
         print("\nNo significant cross-source bias detected in current stories.")
         return
 
-    for story in comparisons:
+    # With thousands of headlines there can be hundreds of clusters;
+    # show the ones covered by the most distinct sources first.
+    comparisons = sorted(comparisons, key=lambda s: len({h["source"] for h in s["headlines"]}), reverse=True)
+    print(f"\n{len(comparisons)} multi-source story clusters found; showing top {min(limit, len(comparisons))}.")
+
+    for story in comparisons[:limit]:
         print(f"\n[STORY CLUSTER {story['cluster_id']}]")
         print("-" * 30)
         
